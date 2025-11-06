@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚡🌸🌫️ The Divine Trinity | Basilica Gate</title>
+  <meta name="description" content="Enter the Basilica Gate — cross the celestial portal to the mythic temples of Zeus, Aphrodite, and Lifesphere.">
+  <meta property="og:title" content="The Divine Trinity - Basilica Gate">
+  <meta name="theme-color" content="#0a0a0a">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Cinzel', serif;
+      background: linear-gradient(140deg, #15151a 40%, #221550 80%);
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 3.2rem;
+      letter-spacing: 0.17em;
+      color: #ffd700;
+      text-shadow: 0 0 32px #ffd700, 0 0 64px #33e2e2;
+      margin-bottom: 0.6rem;
+      animation: titleGlow 4s ease-in-out infinite;
+    }
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 32px #ffd700, 0 0 64px #33e2e2; }
+      50% { text-shadow: 0 0 50px #ffd700, 0 0 90px #33e2e2, 0 0 120px #ff69b4; }
+    }
+    .subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 2.7rem;
+      opacity: 0.75;
+      color: #c0aaff;
+      letter-spacing: 0.05em;
+    }
+    .portals {
+      display: flex;
+      gap: 2.9rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .portal {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      box-shadow: 0 2px 40px #fff8c4e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(16, 16, 40, 0.32);
+      transition: transform 0.15s, background 0.3s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .portal:hover {
+      transform: scale(1.08);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    .portal .sigil {
+      font-size: 4.5rem;
+    }
+    .portal-label {
+      font-size: 1.13rem;
+      margin-top: 9px;
+      letter-spacing: 2px;
+      font-weight: 500;
+      color: #fff;
+    }
+    .portal-zeus {
+      box-shadow: 0 0 50px #ffd700c2;
+    }
+    .portal-zeus:hover {
+      box-shadow: 0 0 70px #ffd700;
+    }
+    .portal-aphrodite {
+      box-shadow: 0 0 50px #ff69b482;
+    }
+    .portal-aphrodite:hover {
+      box-shadow: 0 0 70px #ff69b4;
+    }
+    .portal-lifesphere {
+      box-shadow: 0 0 50px #33e2e282;
+    }
+    .portal-lifesphere:hover {
+      box-shadow: 0 0 70px #33e2e2;
+    }
+    footer {
+      margin-top: 4rem;
+      color: #ffd700;
+      opacity: 0.5;
+      font-size: 0.95rem;
+    }
+    footer a {
+      color: #ffd700;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    footer a:hover {
+      opacity: 1;
+    }
+    @media (max-width: 900px) {
+      .portals {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+      .subtitle {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>THE DIVINE TRINITY</h1>
+    <div class="subtitle">Three Portals • Three Archetypes • One Living Brand</div>
+    <div class="portals">
+      <a href="zeus.html" class="portal portal-zeus">
+        <div class="sigil">⚡</div>
+        <div class="portal-label">ZEUS</div>
+      </a>
+      <a href="aphrodite.html" class="portal portal-aphrodite">
+        <div class="sigil">🌸</div>
+        <div class="portal-label">APHRODITE</div>
+      </a>
+      <a href="lifesphere.html" class="portal portal-lifesphere">
+        <div class="sigil">🌫️</div>
+        <div class="portal-label">LIFESPHERE</div>
+      </a>
+    </div>
+    <footer>
+      <div>Basilica Continuum &nbsp;·&nbsp; <a href="https://kypriatechnologies.org">← Return to Codex</a></div>
+    </footer>
+  </main>
+</body>
+</html>

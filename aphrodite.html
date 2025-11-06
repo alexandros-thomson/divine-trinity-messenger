@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌸 Aphrodite Temple | The Divine Trinity</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #2d1b2e 0%, #3e2639 100%);
+      color: #ffb6c1;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .petals-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ff69b4, #ff1493);
+      border-radius: 50% 0 50% 0;
+      opacity: 0.7;
+      animation: fall 8s infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .temple-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 30px rgba(255, 105, 180, 0.8); }
+      50% { text-shadow: 0 0 50px rgba(255, 105, 180, 1); }
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      color: #ffd6e7;
+    }
+
+    .ai-cta {
+      margin: 3rem 0;
+    }
+
+    .btn-speak-ai {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff69b4 0%, #ff85c1 100%);
+      color: #fff;
+      padding: 1.2rem 3rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 10px;
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .btn-speak-ai:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 60px rgba(255, 105, 180, 0.9);
+    }
+
+    .ai-subtitle {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      color: #ffd6e7;
+    }
+
+    .nav-links {
+      margin-top: 3rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: #ffb6c1;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+      border: 2px solid #ffb6c1;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 105, 180, 0.2);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+
+    footer a {
+      color: #ffb6c1;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="petals-bg" id="petals"></div>
+
+  <div class="temple-content">
+    <h1>🌸 Aphrodite Temple</h1>
+    <p>Welcome to the Temple of Connection. Here, beauty and empathy intertwine. Aphrodite speaks with grace, compassion, and the art of meaningful bonds.</p>
+
+    <!-- AI CTA Section -->
+    <div class="ai-cta">
+      <a href="https://aistudio.facebook.com/ai/28476550585324573/" 
+         target="_blank"
+         class="btn-speak-ai">
+        🌸 Speak with Aphrodite AI
+      </a>
+      <p class="ai-subtitle">Seek wisdom on connection and beauty</p>
+    </div>
+
+    <p>Explore love, relationships, self-worth, and the poetry of human experience.</p>
+
+    <div class="nav-links">
+      <a href="index.html">← Return to Gate</a>
+      <a href="zeus.html">Zeus Temple ⚡</a>
+      <a href="lifesphere.html">Lifesphere Temple 🌫️</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://kypriatechnologies.org">Return to the Basilica Codex</a>
+  </footer>
+
+  <script>
+    // Generate falling rose petals
+    const petalsContainer = document.getElementById('petals');
+    for (let i = 0; i < 20; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + '%';
+      petal.style.animationDelay = Math.random() * 8 + 's';
+      petal.style.animationDuration = (5 + Math.random() * 3) + 's';
+      petalsContainer.appendChild(petal);
+    }
+  </script>
+</body>
+</html>
