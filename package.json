@@ -1,0 +1,9 @@
+{
+  "name": "divine-trinity-oracle",
+  "version": "1.0.0",
+  "description": "Serverless Oracle for Divine Trinity",
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3",
+    "node-fetch": "^3.3.2"
+  }
+}
