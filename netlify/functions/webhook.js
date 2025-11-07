@@ -38,7 +38,7 @@ exports.handler = async (event) => {
             const question = messagingEvent.message.text;
             
             // Call Zeus Oracle for decision
-            const zeusResponse = await fetch(`${process.env.URL}/.netlify/functions/zeus`, {
+            const zeusResponse = await fetch(`${process.env.SITE_URL}/.netlify/functions/zeus`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ question, witnessId: senderId })
