@@ -158,6 +158,68 @@ app.get('/success', (req, res) => {
 });
 
 // Stripe cancel page
+
+// Messenger Profile Setup endpoint
+app.post('/setup-messenger-profile', async (req, res) => {
+  const MESSENGER_PROFILE_URL = 'https://graph.facebook.com/v21.0/me/messenger_profile';
+  
+  try {
+    // 1. Set up Ice Breakers
+    await axios.post(MESSENGER_PROFILE_URL, {
+      ice_breakers: [
+        { question: "🌟 What is Divine Trinity Messenger?", payload: "ABOUT_MESSENGER" },
+        { question: "💰 View Premium Features", payload: "VIEW_PRICING" },
+        { question: "📚 Explore Mythology", payload: "EXPLORE_MYTHOLOGY" },
+        { question: "🎯 How does it work?", payload: "HOW_IT_WORKS" }
+      ]
+    }, { params: { access_token: PAGE_ACCESS_TOKEN } });
+
+    // 2. Set up Persistent Menu
+    await axios.post(MESSENGER_PROFILE_URL, {
+      persistent_menu: [{
+        locale: "default",
+        composer_input_disabled: false,
+        call_to_actions: [
+          { type: "postback", title: "🏛️ About Divine Trinity", payload: "ABOUT_TRINITY" },
+          { type: "postback", title: "💳 Pricing & Features", payload: "VIEW_PRICING" },
+          { type: "web_url", title: "🌐 Visit Website", url: "https://divine-trinity-messenger.onrender.com", webview_height_ratio: "full" }
+        ]
+      }]
+    }, { params: { access_token: PAGE_ACCESS_TOKEN } });
+
+    // 3. Set up Greeting Text
+    await axios.post(MESSENGER_PROFILE_URL, {
+      greeting: [{
+        locale: "default",
+        text: "Welcome to Divine Trinity Messenger! ⚡ Your gateway to mythological conversations. How can I assist you today?"
+      }]
+    }, { params: { access_token: PAGE_ACCESS_TOKEN } });
+
+    // 4. Set up Get Started Button
+    await axios.post(MESSENGER_PROFILE_URL, {
+      get_started: { payload: "GET_STARTED" }
+    }, { params: { access_token: PAGE_ACCESS_TOKEN } });
+
+    res.json({
+      success: true,
+      message: 'Messenger Profile configured successfully!',
+      features: [
+        '✅ Ice Breakers (4 conversation starters)',
+        '✅ Persistent Menu (3 menu items)',
+        '✅ Greeting Text',
+        '✅ Get Started Button'
+      ]
+    });
+  } catch (error) {
+    console.error('Messenger Profile setup error:', error.response?.data || error.message);
+    res.status(500).json({
+      error: 'Failed to configure Messenger Profile',
+      details: error.response?.data || error.message
+    });
+  }
+});
+
+
 app.get('/cancel', (req, res) => {
   res.send('<h1>Upgrade Cancelled</h1><p>You can upgrade anytime. Return to Messenger to continue with free messages.</p>');
 });
