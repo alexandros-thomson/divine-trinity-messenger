@@ -1,136 +1,82 @@
 // netlify/functions/setup-messenger-profile.js
-const axios = require('axios');
+// Run once after deploy to configure Messenger ice breakers, menu, and greeting.
+const { GRAPH_API_VERSION } = require('../../lib/messenger');
 
-exports.handler = async (event, context) => {
-  // Only allow POST requests
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
+    return { statusCode: 405, body: 'POST only' };
   }
 
-  const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-  const MESSENGER_PROFILE_URL = 'https://graph.facebook.com/v21.0/me/messenger_profile';
+  const PROFILE_URL = `https://graph.facebook.com/${GRAPH_API_VERSION}/me/messenger_profile`;
+  const params = `?access_token=${process.env.PAGE_ACCESS_TOKEN}`;
+  const headers = { 'Content-Type': 'application/json' };
 
   try {
-    // 1. Set up Ice Breakers (conversation starters)
-    const iceBreakers = {
-      ice_breakers: [
-        {
-          question: "🌟 What is Divine Trinity Messenger?",
-          payload: "ABOUT_MESSENGER"
-        },
-        {
-          question: "💰 View Premium Features",
-          payload: "VIEW_PRICING"
-        },
-        {
-          question: "📚 Explore Mythology",
-          payload: "EXPLORE_MYTHOLOGY"
-        },
-        {
-          question: "🎯 How does it work?",
-          payload: "HOW_IT_WORKS"
-        }
-      ]
-    };
-
-    await axios.post(MESSENGER_PROFILE_URL, iceBreakers, {
-      params: { access_token: PAGE_ACCESS_TOKEN }
+    // Ice Breakers
+    await fetch(PROFILE_URL + params, {
+      method: 'POST', headers,
+      body: JSON.stringify({
+        ice_breakers: [
+          { question: 'What is the Divine Trinity?', payload: 'ABOUT_TRINITY' },
+          { question: 'I had a dream I want to decode...', payload: 'EXPLORE_MYTHOLOGY' },
+          { question: 'Help me find my creative voice', payload: 'EXPLORE_MYTHOLOGY' },
+          { question: 'How does Premium work?', payload: 'VIEW_PRICING' }
+        ]
+      })
     });
 
-    // 2. Set up Persistent Menu
-    const persistentMenu = {
-      persistent_menu: [
-        {
-          locale: "default",
+    // Persistent Menu
+    await fetch(PROFILE_URL + params, {
+      method: 'POST', headers,
+      body: JSON.stringify({
+        persistent_menu: [{
+          locale: 'default',
           composer_input_disabled: false,
           call_to_actions: [
-            {
-              type: "postback",
-              title: "🏛️ About Divine Trinity",
-              payload: "ABOUT_TRINITY"
-            },
-            {
-              type: "postback",
-              title: "💳 Pricing & Features",
-              payload: "VIEW_PRICING"
-            },
-            {
-              type: "web_url",
-              title: "🌐 Visit Website",
-              url: "https://divine-trinity-messenger.onrender.com",
-              webview_height_ratio: "full"
-            }
+            { type: 'postback', title: 'The Divine Trinity', payload: 'ABOUT_TRINITY' },
+            { type: 'postback', title: 'Premium Features', payload: 'VIEW_PRICING' },
+            { type: 'web_url', title: 'Kypria Studios', url: 'https://kypriatechnologies.org', webview_height_ratio: 'full' }
           ]
-        }
-      ]
-    };
-
-    await axios.post(MESSENGER_PROFILE_URL, persistentMenu, {
-      params: { access_token: PAGE_ACCESS_TOKEN }
+        }]
+      })
     });
 
-    // 3. Set up Greeting Text
-    const greeting = {
-      greeting: [
-        {
-          locale: "default",
-          text: "Welcome to Divine Trinity Messenger! ⚡ Your gateway to mythological conversations. How can I assist you today?"
-        }
-      ]
-    };
-
-    await axios.post(MESSENGER_PROFILE_URL, greeting, {
-      params: { access_token: PAGE_ACCESS_TOKEN }
+    // Greeting Text
+    await fetch(PROFILE_URL + params, {
+      method: 'POST', headers,
+      body: JSON.stringify({
+        greeting: [{
+          locale: 'default',
+          text: 'The Basilica Gate opens. Three flames await -- Zeus, Aphrodite, Lifesphere. Speak, and the right one answers.'
+        }]
+      })
     });
 
-    // 4. Set up Get Started Button
-    const getStarted = {
-      get_started: {
-        payload: "GET_STARTED"
-      }
-    };
-
-    await axios.post(MESSENGER_PROFILE_URL, getStarted, {
-      params: { access_token: PAGE_ACCESS_TOKEN }
-    });
-
-    // 5. Whitelist domains for webview
-    const whitelist = {
-      whitelisted_domains: [
-        "https://divine-trinity-messenger.onrender.com"
-      ]
-    };
-
-    await axios.post(MESSENGER_PROFILE_URL, whitelist, {
-      params: { access_token: PAGE_ACCESS_TOKEN }
+    // Get Started Button
+    await fetch(PROFILE_URL + params, {
+      method: 'POST', headers,
+      body: JSON.stringify({ get_started: { payload: 'GET_STARTED' } })
     });
 
     return {
       statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         success: true,
-        message: 'Messenger Profile configured successfully!',
+        message: 'Messenger Profile configured',
         features: [
-          '✅ Ice Breakers (4 conversation starters)',
-          '✅ Persistent Menu (3 menu items)',
-          '✅ Greeting Text',
-          '✅ Get Started Button',
-          '✅ Domain Whitelist'
+          'Ice Breakers (4 conversation starters)',
+          'Persistent Menu (3 items)',
+          'Greeting Text',
+          'Get Started Button'
         ]
       })
     };
-
   } catch (error) {
-    console.error('Messenger Profile setup error:', error.response?.data || error.message);
+    console.error('[PROFILE] Setup error:', error.message);
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        error: 'Failed to configure Messenger Profile',
-        details: error.response?.data || error.message
-      })
+      body: JSON.stringify({ error: 'Failed to configure Messenger Profile', details: error.message })
     };
   }
 };

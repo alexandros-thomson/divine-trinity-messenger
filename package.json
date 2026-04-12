@@ -1,12 +1,11 @@
 {
   "name": "divine-trinity-messenger",
-  "version": "2.0.0",
-  "description": "Divine Trinity AI Messenger -- Zeus, Aphrodite, Lifesphere. GPT-4 powered mythic personas via Facebook Messenger with Stripe Premium.",
-  "main": "server.js",
+  "version": "2.1.0",
+  "description": "Divine Trinity AI Messenger -- Zeus, Aphrodite, Lifesphere. GPT-4 powered mythic personas via Facebook Messenger. Netlify Functions + Supabase backend.",
+  "main": "netlify/functions/webhook.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "setup-profile": "node -e \"fetch('http://localhost:3000/setup-messenger-profile', {method:'POST'}).then(r=>r.json()).then(console.log)\""
+    "dev": "netlify dev",
+    "build": "echo 'Static site -- no build step needed'"
   },
   "keywords": [
     "messenger",
@@ -17,20 +16,19 @@
     "openai",
     "mythology",
     "divine-trinity",
-    "kypria"
+    "kypria",
+    "netlify",
+    "supabase"
   ],
   "author": "Kostas Kyprianos <mrspetses@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.0",
-    "jsonwebtoken": "^9.0.2",
+    "@supabase/supabase-js": "^2.45.0",
     "openai": "^4.73.0",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
     "stripe": "^17.4.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "netlify-cli": "^17.0.0"
   },
   "engines": {
     "node": ">=20.0.0"
