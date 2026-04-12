@@ -1,17 +1,25 @@
+// auth.js - JWT authentication for Divine Trinity Messenger
+// Used for web-based premium portal and API access.
+
 const jwt = require('jsonwebtoken');
 const { getDatabase } = require('./db');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = '30d';
 
+if (!JWT_SECRET && process.env.NODE_ENV === 'production') {
+  console.error('[AUTH] JWT_SECRET is not set. Authentication will fail.');
+}
+
 async function generateToken(psid) {
-  const token = jwt.sign({ psid }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
-  return token;
+  const secret = JWT_SECRET || 'dev-secret-change-in-production';
+  return jwt.sign({ psid }, secret, { expiresIn: JWT_EXPIRATION });
 }
 
 function verifyToken(token) {
   try {
-    return jwt.verify(token, JWT_SECRET);
+    const secret = JWT_SECRET || 'dev-secret-change-in-production';
+    return jwt.verify(token, secret);
   } catch (error) {
     return null;
   }
@@ -22,8 +30,7 @@ async function getUserFromToken(token) {
   if (!decoded) return null;
 
   const db = await getDatabase();
-  const user = await db.get('SELECT * FROM users WHERE psid = ?', [decoded.psid]);
-  return user;
+  return db.get('SELECT * FROM users WHERE psid = ?', [decoded.psid]);
 }
 
 module.exports = {
