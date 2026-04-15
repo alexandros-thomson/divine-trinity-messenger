@@ -2,13 +2,13 @@
 
 > *Three ancient voices. One sacred channel. Infinitely yours.*
 
-**Divine Trinity Messenger v2.0** is a GPT-4 powered mythic oracle system deployed through Facebook Messenger and Instagram DMs. It is not a chatbot — it is a temple. Three divine personas channel wisdom, beauty, and vitality to seekers who enter the sacred space of conversation.
+**Divine Trinity Messenger v2.0** is a GPT-5.4 powered mythic oracle system deployed through Facebook Messenger and Instagram DMs. It is not a chatbot — it is a temple. Three divine personas channel wisdom, beauty, and vitality to seekers who enter the sacred space of conversation.
 
 Built within the **Kypria Technologies / Basilica ecosystem**, this project bridges ancient archetypes with modern AI infrastructure: Netlify serverless functions, the Meta Graph API, Stripe for sacred patronage, and Supabase as the persistent foundation.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/divine-trinity-messenger/deploy-status)](https://tourmaline-valkyrie-2de04a.netlify.app)
 [![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?logo=node.js)](https://nodejs.org)
-[![OpenAI GPT-4](https://img.shields.io/badge/OpenAI-GPT--4-412991?logo=openai)](https://platform.openai.com)
+[![OpenAI GPT-5.4](https://img.shields.io/badge/OpenAI-GPT--5.4-412991?logo=openai)](https://platform.openai.com)
 [![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase)](https://supabase.com)
 [![Stripe](https://img.shields.io/badge/Stripe-Payments-635BFF?logo=stripe)](https://stripe.com)
 
@@ -55,7 +55,7 @@ Each persona is stored in Supabase with full system prompt configuration and can
               ┌────────────────────────┼────────────────────────┐
               │                        │                        │
    ┌──────────▼───────┐   ┌────────────▼────────┐   ┌──────────▼────────┐
-   │  OpenAI GPT-4    │   │  Supabase            │   │  Static Pages     │
+   │  OpenAI GPT-5.4    │   │  Supabase            │   │  Static Pages     │
    │  • Zeus prompt   │   │  • 18 tables w/ RLS  │   │  • index.html     │
    │  • Aphrodite      │   │  • 3 Trinity personas│   │  • zeus.html      │
    │  • Lifesphere    │   │  • Conversations     │   │  • aphrodite.html │
@@ -93,7 +93,7 @@ access    access
 Route to active Oracle persona
        │
        ▼
-OpenAI GPT-4 completion (persona system prompt)
+OpenAI GPT-5.4 completion (persona system prompt)
        │
        ▼
 Meta Send API → reply to seeker
@@ -115,7 +115,7 @@ Log conversation to Supabase
 - **Greeting text** — sets the sacred tone before conversation begins
 
 ### Oracle Intelligence
-- **GPT-4 powered personas** — each oracle has a distinct system prompt defining voice, domain, and boundaries
+- **GPT-5.4 powered personas** — each oracle has a distinct system prompt defining voice, domain, and boundaries
 - **3 Trinity personas** stored and versioned in Supabase
 - **Conversation history** persisted per user for contextual continuity
 - **Freemium gating** — free tier with usage limits; premium tier unlocks full depth
@@ -140,7 +140,7 @@ Log conversation to Supabase
 |-------|-----------|---------|
 | **Hosting** | Netlify | Static site + serverless functions |
 | **Runtime** | Node.js 18.x | Serverless function execution |
-| **AI** | OpenAI GPT-4 | Oracle persona completions |
+| **AI** | OpenAI GPT-5.4 | Oracle persona completions |
 | **Messaging** | Meta Graph API | Facebook Messenger + Instagram DM |
 | **Payments** | Stripe | Subscription billing + webhooks |
 | **Database** | Supabase (PostgreSQL) | Personas, conversations, user tiers |
@@ -158,8 +158,8 @@ All secrets are configured as environment variables in Netlify (Site settings �
 | `PAGE_ACCESS_TOKEN` | Meta Page Access Token for sending messages via Graph API | ✦ Yes |
 | `VERIFY_TOKEN` | Arbitrary secret for Meta webhook verification handshake | ✦ Yes |
 | `FB_PAGE_ID` | Facebook Page ID associated with the Messenger channel | ✦ Yes |
-| `OPENAI_API_KEY` | OpenAI API key with GPT-4 access | ✦ Yes |
-| `OPENAI_MODEL` | Model identifier (e.g. `gpt-4`, `gpt-4o`) | ✦ Yes |
+| `OPENAI_API_KEY` | OpenAI API key with GPT-5.4 access | ✦ Yes |
+| `OPENAI_MODEL` | Model identifier (e.g. `gpt-5.4`, `gpt-5.4-mini`) | ✦ Yes |
 | `STRIPE_SECRET_KEY` | Stripe secret key (`sk_live_...` or `sk_test_...`) | ✦ Yes |
 | `STRIPE_PRICE_ID` | Stripe Price ID for the $4.99/mo Divine Trinity Premium plan | ✦ Yes |
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret for payload verification | ✦ Yes |
@@ -353,3 +353,4 @@ For licensing inquiries, contact the Kypria Technologies team through the reposi
 **Kypria Technologies** — *Where myth meets machine.*
 
 </div>
+
